@@ -13,8 +13,17 @@ public class ABusinessTest {
 		int actualResult = aBusinessImpl.calculateSum(new int[] {1,2,3});
 		int expectedResult = 6;
 		
-		assertEquals(expectedResult, actualResult);
+		assertEquals(expectedResult, actualResult);		
+	}
+	
+	@Test
+	public void calculateSum_emptyArray() {
+		ABusinessImpl aBusinessImpl = new ABusinessImpl();
 		
+		int actualResult = aBusinessImpl.calculateSum(new int[] {});
+		int expectedResult = 0;
+		
+		assertEquals(expectedResult, actualResult);
 	}
 	
 }
