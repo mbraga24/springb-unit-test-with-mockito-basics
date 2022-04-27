@@ -44,6 +44,7 @@ public class ABusinessStubTest {
 	public void calculateSumUsingADataService_basic() {
 		ABusinessImpl aBusinessImpl = new ABusinessImpl();
 		aBusinessImpl.setaDataService(new ADataServiceStubBasic());
+		
 		int actualResult = aBusinessImpl.calculateSumUsingDataService(); // new int[] {1,2,3}
 		int expectedResult = 6;
 		
@@ -65,11 +66,10 @@ public class ABusinessStubTest {
 	@Test
 	public void calculateSumUsingADataService_oneValue() {
 		ABusinessImpl aBusinessImpl = new ABusinessImpl();
-		
 		aBusinessImpl.setaDataService(new ADataServiceStubOneValue());
 		
 		int actualResult = aBusinessImpl.calculateSumUsingDataService(); // new int[] {5}
-		int expectedResult = 1;
+		int expectedResult = 5;
 		
 		assertEquals(expectedResult, actualResult);
 	}
