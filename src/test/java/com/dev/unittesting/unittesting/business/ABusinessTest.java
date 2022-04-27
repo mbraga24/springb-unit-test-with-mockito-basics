@@ -26,4 +26,14 @@ public class ABusinessTest {
 		assertEquals(expectedResult, actualResult);
 	}
 	
+	@Test
+	public void calculateSum_oneValue() {
+		ABusinessImpl aBusinessImpl = new ABusinessImpl();
+		
+		int actualResult = aBusinessImpl.calculateSum(new int[] {1});
+		int expectedResult = 1;
+		
+		assertEquals(expectedResult, actualResult);
+	}
+	
 }
