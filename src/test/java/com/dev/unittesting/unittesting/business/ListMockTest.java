@@ -146,7 +146,7 @@ public class ListMockTest {
 	/*
 	 * Argument Capture
 	 * 
-	 * Capturing multiple arguments on multiple method calss.
+	 * Capturing multiple arguments on multiple method calls.
 	 */
 	@Test
 	public void multipleArgumentCapturing() {
