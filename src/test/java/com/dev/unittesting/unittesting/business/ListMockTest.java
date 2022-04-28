@@ -1,9 +1,14 @@
 package com.dev.unittesting.unittesting.business;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyFloat;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -22,7 +27,6 @@ public class ListMockTest {
 	}
 	
 	/* 
-	 * 
 	 * A method if you want to return different values.
 	 * 
 	 * returns: 5
@@ -41,7 +45,6 @@ public class ListMockTest {
 	
 	
 	/* 
-	 * 
 	 * Defaults - 
 	 * 	- numeric (0) 
 	 * 	- boolean (false)
@@ -62,6 +65,7 @@ public class ListMockTest {
 	
 	
 	/*
+	 * Argument Matcher
 	 * 
 	 * anyInt() is called an argument matcher. There are several other argument matchers available in
 	 * mockito.
@@ -80,4 +84,36 @@ public class ListMockTest {
 		assertEquals("hello, you!", mock.get(1));	
 	}
 
+	/*
+	 * Verification
+	 *
+	 * In the code tested, get method is called with a parameter 0. That's what it's going to 
+	 * be verified.
+	 * 
+	 */
+	@Test
+	public void verificationBasics() {
+		
+//		SUT - SYSTEM UNDER TEST
+		List<String> mock = mock(List.class);
+		
+		String value1 = mock.get(0);
+		String value2 = mock.get(1);
+		
+//		Verify
+		
+//		verify if the (mock) get method is call with specific parameter
+		verify(mock).get(0);
+//		verify if the (mock) get method is called with anyInt() - argument matcher
+//		verify(mock).get(anyInt()); // will fail - error: wanted 1 but it was 2 times
+//		verify the number of times a specific (mock) get method is called
+		verify(mock, times(2)).get(anyInt());
+//		verify if the (mock) get method is called at least n number of times
+		verify(mock, atLeast(1)).get(anyInt());
+		
+//		other conditions
+		verify(mock, atMost(2)).get(anyInt());
+		verify(mock, never()).get(2);
+		verify(mock, atLeastOnce()).get(anyInt());
+	}
 }
