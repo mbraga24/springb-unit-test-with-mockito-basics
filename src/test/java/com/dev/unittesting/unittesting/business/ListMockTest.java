@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 public class ListMockTest {
 	
@@ -115,5 +116,27 @@ public class ListMockTest {
 		verify(mock, atMost(2)).get(anyInt());
 		verify(mock, never()).get(2);
 		verify(mock, atLeastOnce()).get(anyInt());
+	}
+	
+	/*
+	 * Argument Capture
+	 * 
+	 * Capturing argument that is passed to the method call.
+	 */
+	@Test
+	public void argumentCapturing() {
+		
+//		SUT - SYSTEM UNDER TEST
+		List<String> mock = mock(List.class);
+		
+		mock.add("This is an example of a String passed to the method as an argument");
+		
+//		Verification
+		
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		verify(mock).add(captor.capture());
+		
+		assertEquals("This is an example of a String passed to the method as an argument", captor.getValue());
+		
 	}
 }
