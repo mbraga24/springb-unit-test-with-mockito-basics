@@ -100,7 +100,7 @@ public class ListMockTest {
 		String value1 = mock.get(0);
 		String value2 = mock.get(1);
 		
-//		Verify
+//		Verification
 		
 //		verify if the (mock) get method is call with specific parameter
 		verify(mock).get(0);
