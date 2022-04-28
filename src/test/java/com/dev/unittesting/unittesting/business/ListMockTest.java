@@ -138,5 +138,36 @@ public class ListMockTest {
 		
 		assertEquals("This is an example of a String passed to the method as an argument", captor.getValue());
 		
+		
+		// ====> EXERCISE: CREATE A TEST TO CHECK IF THE METHOD CALL HAS AN INTERGER, A LIST AND ARRAY
+		
 	}
+	
+	/*
+	 * Argument Capture
+	 * 
+	 * Capturing multiple arguments on multiple method calss.
+	 */
+	@Test
+	public void multipleArgumentCapturing() {
+		
+//		SUT - SYSTEM UNDER TEST
+		List<String> mock = mock(List.class);
+		
+		mock.add("I will write smaller strings");
+		mock.add("This one is smaller");
+		mock.add("...");
+		
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		verify(mock, times(3)).add(captor.capture());
+		
+		List<String> allValues = captor.getAllValues();
+		
+		assertEquals("I will write smaller strings", allValues.get(0));
+		assertEquals("This one is smaller", allValues.get(1));
+		assertEquals("...", allValues.get(2));
+		
+	}
+	
+	
 }
