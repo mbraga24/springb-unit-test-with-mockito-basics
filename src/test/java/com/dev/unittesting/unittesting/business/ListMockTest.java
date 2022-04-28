@@ -1,6 +1,8 @@
 package com.dev.unittesting.unittesting.business;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyFloat;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,10 +22,12 @@ public class ListMockTest {
 	}
 	
 	/* 
+	 * 
 	 * A method if you want to return different values.
 	 * 
 	 * returns: 5
 	 * returns: 10
+	 * 
 	 */
 	@Test
 	public void returnDifferentValues() {
@@ -36,11 +40,14 @@ public class ListMockTest {
 	}
 	
 	
-	/* Defaults - 
+	/* 
+	 * 
+	 * Defaults - 
 	 * 	- numeric (0) 
 	 * 	- boolean (false)
 	 * 	- Objects (null)
 	 * 	- Collections (empty collection)
+	 * 
 	 */
 	@Test
 	public void returnWithParameters() {
@@ -51,6 +58,26 @@ public class ListMockTest {
 		assertEquals("hello, buddy!", mock.get(0));
 //		assertEquals("hello, buddy!", mock.get(1)); // test will fail
 		assertEquals(null, mock.get(1));
+	}
+	
+	
+	/*
+	 * 
+	 * anyInt() is called an argument matcher. There are several other argument matchers available in
+	 * mockito.
+	 * 
+	 * When a method is called on a Mock which matches the argument matcher, it will return the value
+	 * specified in .thenReturn() 
+	 * 
+	 */
+	@Test
+	public void returnWithGenericParameters() {
+		List mock = mock(List.class);
+		
+		when(mock.get(anyInt())).thenReturn("hello, you!");
+		
+		assertEquals("hello, you!", mock.get(0));
+		assertEquals("hello, you!", mock.get(1));	
 	}
 
 }
