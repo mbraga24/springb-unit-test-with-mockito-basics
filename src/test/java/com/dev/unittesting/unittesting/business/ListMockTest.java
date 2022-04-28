@@ -19,6 +19,12 @@ public class ListMockTest {
 		assertEquals(5, mock.size());
 	}
 	
+	/* 
+	 * A method if you want to return different values.
+	 * 
+	 * returns: 5
+	 * returns: 10
+	 */
 	@Test
 	public void returnDifferentValues() {
 		
@@ -29,6 +35,13 @@ public class ListMockTest {
 		assertEquals(10, mock.size());
 	}
 	
+	
+	/* Defaults - 
+	 * 	- numeric (0) 
+	 * 	- boolean (false)
+	 * 	- Objects (null)
+	 * 	- Collections (empty collection)
+	 */
 	@Test
 	public void returnWithParameters() {
 		
