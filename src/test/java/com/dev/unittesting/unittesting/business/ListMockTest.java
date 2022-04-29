@@ -167,7 +167,6 @@ public class ListMockTest {
 		assertEquals("This one is smaller", allValues.get(1));
 		assertEquals("...", allValues.get(2));
 		
-	}
-	
+	}	
 	
 }
