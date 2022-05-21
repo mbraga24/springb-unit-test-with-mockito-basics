@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 //@RunWith(SpringRunner.class)
 @WebMvcTest(Greetings.class) // List the MockMvc framework for use
@@ -47,12 +47,36 @@ public class GreetingsTest {
 		MvcResult result = mockMvc.perform(request).andReturn();
 		
 		/*
-		 * STEP 4: Verify if the result contains the values we want. 
+		 * STEP 4: Verify if the result contains the values we want. (This step varies based on each test case)
 		 * 
 		 * .getResponse: Return the resulting response.
 		 * .getContentAsString(): Get the content of the response body as a String.
 		 */
 		assertEquals("Greetings!!", result.getResponse().getContentAsString()); // Verify "Greetings!"
+	}
+	
+	@Test
+	public void greetings_checkResponseContentWithMatchers() throws Exception {
+		
+		/* 
+		 * STEP 2: Build the request
+		 */
+		RequestBuilder request = MockMvcRequestBuilders
+				.get("/greetings")
+				.accept(MediaType.APPLICATION_JSON);
+		
+		/*
+		 * STEP 3: Execute the request and retrieve the result. 
+		 */
+		MvcResult result = mockMvc
+				.perform(request)
+				.andExpect(MockMvcResultMatchers.status().isOk()) // or .is(200)
+				.andExpect(MockMvcResultMatchers.content().string("Greetings!!!"))
+				.andReturn();
+		
+		/*
+		 * STEP 4: Verify if the result contains the values we want. (This step varies based on each test case)
+		 */
 	}
 	
 }
