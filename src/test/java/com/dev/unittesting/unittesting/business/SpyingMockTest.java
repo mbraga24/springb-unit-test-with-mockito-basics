@@ -12,13 +12,13 @@ public class SpyingMockTest {
 	 * A mock does not retain behavior (code) of the original class.
 	 */
 	
-	@Test
-	public void mockingTest() {
-		
-		ArrayList<String> arrayListMock = mock(ArrayList<String>class);
-		
-		System.out.println(arrayListMock.get(0));
-		
-	}
+//	@Test
+//	public void mockingTest() {
+//		
+//		ArrayList<String> arrayListMock = mock(ArrayList.class);
+//		
+//		System.out.println(arrayListMock.get(0));
+//		
+//	}
 	
 }
