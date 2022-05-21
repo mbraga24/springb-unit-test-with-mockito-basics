@@ -10,7 +10,7 @@ public class ItemController {
 	
 	@GetMapping("/shop-item")
 	public Item thisItem() {
-		return new Item(1, "Sunglasses", 119.99, 85);
+		return new Item(1, "Sunglasses", 119.95, 85);
 	}
 	
 }
