@@ -1,8 +1,11 @@
 package com.dev.unittesting.unittesting.controller;
 
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -10,15 +13,21 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.dev.unittesting.unittesting.business.ItemBusinessService;
+import com.dev.unittesting.unittesting.model.Item;
+
 //@RunWith(SpringRunner.class)
 @WebMvcTest(ItemController.class)
 class ItemControllerTest {
 
 	/*
-	 * STEP 1: Autowired the 
+	 * STEP 1: Declare MockMvc and Autowired
 	 */
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@MockBean 
+	private ItemBusinessService businessService;
 	
 	@Test
 	void shopItem_checkJsonResponseContentWithMatchers() throws Exception {
@@ -52,5 +61,23 @@ class ItemControllerTest {
 		/*
 		 * STEP 4: Verify if the result contains the values we want. (This step varies based on each test case)
 		 */
+	}
+	
+	@Test
+	public void retrieveItem_checkJsonResponseContentWithMatchers() throws Exception {
+		
+		when(businessService.retrieveHardcodedItem()).thenReturn(new Item(1, "Iphone 6 Cover - black", 119.95, 85));
+		
+		RequestBuilder request = MockMvcRequestBuilders
+				.get("/item-business-sample")
+				.accept(MediaType.APPLICATION_JSON);
+		
+		MvcResult result = mockMvc.perform(request)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Iphone 6 Cover - black\",\"price\":119.95,\"quantity\":85}"))
+				.andReturn();
+		
+		
+		
 	}
 }
