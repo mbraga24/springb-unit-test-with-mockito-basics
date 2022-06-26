@@ -46,7 +46,7 @@ class ItemControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 //				.andExpect(MockMvcResultMatchers.content().json("{\"id\": 1,\"name\":\"Sunglasses\",\"price\": 119.99,\"quantity\": 85}")) // tests will still succeed. the json() method understands the json syntax and ignores spaces.
 //				.andExpect(MockMvcResultMatchers.content().string("{\"id\": 1,\"name\":\"Sunglasses\",\"price\": 119.99,\"quantity\": 85}")) // this test will fail because when expecting string() the value needs to be exactly like we're expecting from the result. it won't ignore spaces.
-				.andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Sunglasses\"}")) // test will still succeed if the json expected isn't complete. 
+				.andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Sunglasses\"}")) // test will still succeed even if the json expected isn't complete. 
 				.andReturn();
 			
 		/*
