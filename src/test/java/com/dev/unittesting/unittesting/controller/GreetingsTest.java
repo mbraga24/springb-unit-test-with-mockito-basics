@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class GreetingsTest {
 	
 	/*
-	 * STEP 1: Autowired the MockMvc
+	 * STEP 1: Declare MockMvc and Autowired
 	 */
 	@Autowired
 	private MockMvc mockMvc;
