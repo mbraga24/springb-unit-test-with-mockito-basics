@@ -30,4 +30,9 @@ public class ItemController {
 		return businessService.retrieveAllItems();
 	}
 	
+	@GetMapping("/list-all-off")
+	public List<Item> retrieveAll20Off() {
+		return businessService.retrieveAllItems20Off();
+	}
+	
 }

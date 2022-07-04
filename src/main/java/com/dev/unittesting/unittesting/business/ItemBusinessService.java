@@ -19,7 +19,7 @@ public class ItemBusinessService {
 		return new Item(1, "Iphone 6 Cover - black", 119.95, 85);
 	}
 
-	public List<Item> retrieveAllItems() {
+	public List<Item> retrieveAllItems20Off() {
 		List<Item> items = itemRepository.findAll();
 		
 		double newPrice = 0.0;
@@ -28,6 +28,10 @@ public class ItemBusinessService {
 			item.setPrice(newPrice);
 		}
 		return items;
+	}
+	
+	public List<Item> retrieveAllItems() {
+		return itemRepository.findAll();
 	}
 	
 }
