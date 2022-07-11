@@ -52,7 +52,7 @@ public class GreetingsTest {
 		 * .getResponse: Return the resulting response.
 		 * .getContentAsString(): Get the content of the response body as a String.
 		 */
-		assertEquals("Greetings!!", result.getResponse().getContentAsString()); // Verify "Greetings!"
+		assertEquals("Greetings!!!", result.getResponse().getContentAsString()); // Verify "Greetings!"
 	}
 	
 	@Test

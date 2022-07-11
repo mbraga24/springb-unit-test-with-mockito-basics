@@ -15,24 +15,19 @@ public class ItemController {
 	@Autowired
 	private ItemBusinessService businessService;
 	
-	@GetMapping("/shop-item")
-	public Item thisItem() {
+	@GetMapping("/hardcoded-item")
+	public Item hardcoded() {
 		return new Item(1, "Sunglasses", 119.95, 85);
 	}
 	
-	@GetMapping("/item-business-sample")
-	public Item retrieveItem() {
-		return businessService.retrieveHardcodedItem();
+	@GetMapping("/one-item")
+	public Item retrieveOneItem() {
+		return businessService.retrieveOneItem();
 	}
 	
-	@GetMapping("/list-all")
-	public List<Item> retrieveAll() {
-		return businessService.retrieveAllItems();
-	}
-	
-	@GetMapping("/list-all-off")
-	public List<Item> retrieveAll20Off() {
-		return businessService.retrieveAllItems20Off();
+	@GetMapping("/multiple-items")
+	public List<Item> retrieveMultipleItems() {
+		return businessService.retrieveMultipleItems();
 	}
 	
 }

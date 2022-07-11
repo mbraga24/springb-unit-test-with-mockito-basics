@@ -2,6 +2,8 @@ package com.dev.unittesting.unittesting.controller;
 
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -18,7 +20,7 @@ import com.dev.unittesting.unittesting.model.Item;
 
 //@RunWith(SpringRunner.class)
 @WebMvcTest(ItemController.class)
-class ItemControllerTest {
+public class ItemControllerTest {
 
 	/*
 	 * STEP 1: Declare MockMvc and Autowired
@@ -40,7 +42,7 @@ class ItemControllerTest {
 		 * - What is the Media Type?
 		 */
 		RequestBuilder request = MockMvcRequestBuilders
-				.get("/shop-item")
+				.get("/hardcoded-item")
 				.accept(MediaType.APPLICATION_JSON);
 		
 		/*
@@ -53,8 +55,8 @@ class ItemControllerTest {
 		 */
 		MvcResult result = mockMvc.perform(request)
 				.andExpect(MockMvcResultMatchers.status().isOk())
-//				.andExpect(MockMvcResultMatchers.content().json("{\"id\": 1,\"name\":\"Sunglasses\",\"price\": 119.99,\"quantity\": 85}")) // tests will still succeed. the json() method understands the json syntax and ignores spaces.
-//				.andExpect(MockMvcResultMatchers.content().string("{\"id\": 1,\"name\":\"Sunglasses\",\"price\": 119.99,\"quantity\": 85}")) // this test will fail because when expecting string() the value needs to be exactly like we're expecting from the result. it won't ignore spaces.
+				// .andExpect(MockMvcResultMatchers.content().json("{\"id\": 1,\"name\":\"Sunglasses\",\"price\": 119.99,\"quantity\": 85}")) // tests will still succeed. the json() method understands the json syntax and ignores spaces.
+				// .andExpect(MockMvcResultMatchers.content().string("{\"id\": 1,\"name\":\"Sunglasses\",\"price\": 119.99,\"quantity\": 85}")) // this test will fail because when expecting string() the value needs to be exactly like we're expecting from the result. it won't ignore spaces.
 				.andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Sunglasses\"}")) // test will still succeed even if the json expected isn't complete. 
 				.andReturn();
 			
@@ -64,20 +66,37 @@ class ItemControllerTest {
 	}
 	
 	@Test
-	public void retrieveItem_checkJsonResponseContentWithMatchers() throws Exception {
+	void testRetrieveItem_checkJsonResponseContentWithMatchers() throws Exception {
 		
-		when(businessService.retrieveHardcodedItem()).thenReturn(new Item(1, "Iphone 6 Cover - black", 119.95, 85));
+		when(businessService.retrieveOneItem()).thenReturn(
+				new Item(1, "Item_1", 10, 10));
 		
 		RequestBuilder request = MockMvcRequestBuilders
-				.get("/item-business-sample")
+				.get("/one-item")
 				.accept(MediaType.APPLICATION_JSON);
 		
 		MvcResult result = mockMvc.perform(request)
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Iphone 6 Cover - black\",\"price\":119.95,\"quantity\":85}"))
+				.andExpect(MockMvcResultMatchers.content().json("{id:1, name: Item_1, price: 10, quantity: 10}"))
 				.andReturn();
-		
-		
-		
 	}
+	
+	@Test
+	void testRetrieveMultipleItems_checkJsonResponseContentWithMatchers() throws Exception {
+		
+		when(businessService.retrieveMultipleItems()).thenReturn(
+				Arrays.asList(new Item(1, "Item_1", 10, 10),
+							  new Item(2, "Item_2", 20, 20))
+				);
+		
+		RequestBuilder request = MockMvcRequestBuilders
+				.get("/multiple-items")
+				.accept(MediaType.APPLICATION_JSON);
+		
+		MvcResult result = mockMvc.perform(request)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.content().json("[{id: 1, name: Item_1, price: 10, quantity: 10}, {id: 2, name: Item_2, price: 20, quantity: 20}]"))
+				.andReturn();
+	}
+	
 }
